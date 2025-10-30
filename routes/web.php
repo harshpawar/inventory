@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('reports/manufactured', [ReportController::class, 'manufactured'])->name('reports.manufactured');
     Route::get('reports/inventory-usage', [ReportController::class, 'inventoryUsage'])->name('reports.inventoryUsage');
+    Route::get('reports/inventory-movements', [ReportController::class, 'inventoryMovements'])->name('reports.inventoryMovements');
 });
 
 require __DIR__.'/auth.php';

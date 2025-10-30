@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\InventoryItem;
 use App\Models\Manufacture;
 use App\Models\ManufactureUsage;
+use App\Models\InventoryMovement;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -72,6 +73,13 @@ class ManufactureController extends Controller
                     'manufacture_id' => $manufacture->id,
                     'inventory_item_id' => $itemId,
                     'quantity' => $need,
+                ]);
+                InventoryMovement::create([
+                    'inventory_item_id' => $itemId,
+                    'change' => -1 * (float) $need,
+                    'reason' => 'manufacture',
+                    'reference_type' => Manufacture::class,
+                    'reference_id' => $manufacture->id,
                 ]);
             }
         });

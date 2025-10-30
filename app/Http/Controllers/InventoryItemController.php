@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\InventoryItem;
+use App\Models\InventoryMovement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,7 +39,17 @@ class InventoryItemController extends Controller
             'description' => ['nullable','string'],
         ]);
 
-        InventoryItem::create($validated);
+        $item = InventoryItem::create($validated);
+
+        if (!empty($validated['stock']) && (float) $validated['stock'] > 0) {
+            InventoryMovement::create([
+                'inventory_item_id' => $item->id,
+                'change' => (float) $validated['stock'],
+                'reason' => 'initial',
+                'reference_type' => null,
+                'reference_id' => null,
+            ]);
+        }
         return redirect()->route('inventory-items.index')->with('status','Inventory item created');
     }
 
@@ -94,6 +105,13 @@ class InventoryItemController extends Controller
                 abort(422, 'Insufficient stock');
             }
             $inventoryItem->update(['stock' => $new]);
+            InventoryMovement::create([
+                'inventory_item_id' => $inventoryItem->id,
+                'change' => (float) $validated['delta'],
+                'reason' => 'adjustment',
+                'reference_type' => null,
+                'reference_id' => null,
+            ]);
         });
         return back()->with('status','Stock adjusted');
     }
