@@ -25,8 +25,8 @@
                         {{ __('Manufacturing') }}
                     </x-nav-link>
                     {{-- Start: Reports Dropdown (Desktop) --}}
-                    <div class="relative" x-data="{ openReports: false }">
-                        <button type="button"
+                    {{-- <div class="relative" x-data="{ openReports: false }"> --}}
+                        <a type="button"
                             @click="openReports = !openReports"
                             @keydown.escape.window="openReports = false"
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md bg-white dark:bg-gray-800 focus:outline-none transition {{ request()->routeIs('reports.*') ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }}"
@@ -35,7 +35,7 @@
                             aria-expanded="openReports">
                             {{ __('Reports') }}
                             <svg class="ms-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </button>
+                        </a>
                         <div
                             x-show="openReports"
                             @click.away="openReports = false"
@@ -61,7 +61,7 @@
                                 </x-dropdown-link>
                             </div>
                         </div>
-                    </div>
+                    {{-- </div> --}}
                     {{-- End: Reports Dropdown (Desktop) --}}
                 </div>
             </div>
