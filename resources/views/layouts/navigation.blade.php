@@ -32,7 +32,7 @@
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md bg-white dark:bg-gray-800 focus:outline-none transition {{ request()->routeIs('reports.*') ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }}"
                             :class="{'text-indigo-600 dark:text-indigo-400': openReports}"
                             aria-haspopup="true"
-                            aria-expanded="openReports">
+                            aria-expanded="openReports" style="margin-top: 16px;">
                             {{ __('Reports') }}
                             <svg class="ms-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
